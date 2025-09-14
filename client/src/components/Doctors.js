@@ -76,10 +76,8 @@ const Doctors = () => {
 
     return (
         <div className="appointments-container">
-            {/* Sidebar Section */}
             <SideBar id="doctors" />
 
-            {/* Main Content */}
             <main className="main-content">
                 <header className="header">
                     <div>

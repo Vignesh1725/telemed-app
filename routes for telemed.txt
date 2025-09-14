@@ -1,8 +1,0 @@
-
-          <Route path='/' element={<Register />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/dashboard' element={<Dashboard />}/>
-          <Route path='/video-room' element={<VideoRoom />} />
-          <Route path='/appointments' element={<Appointments/>}/>
-          <Route path='/chabox' element={<ChatBox/>}/>

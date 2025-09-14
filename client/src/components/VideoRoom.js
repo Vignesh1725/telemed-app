@@ -1,4 +1,3 @@
-// client/VideoRoom.js
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import io from "socket.io-client";
@@ -52,12 +51,12 @@ const VideoRoom = () => {
       }
     }
     const handleUserConnected = (remoteUserId) => {
-      console.log("👤 New user connected:", remoteUserId);
+      console.log("New user connected:", remoteUserId);
       createOffer(remoteUserId);
     };
 
     const handleOffer = async ({ from, offer }) => {
-      console.log('Received offer from:', from, 'offer:', offer); // Debug log
+      console.log('Received offer from:', from, 'offer:', offer);
 
       if (!from || !offer) {
         console.error('Invalid offer - missing from or offer fields');
@@ -76,7 +75,7 @@ const VideoRoom = () => {
         localStreamRef.current.getTracks().forEach(track => {
           pc.addTrack(track, localStreamRef.current);
         });
-        console.log("📹 Local stream tracks:", localStreamRef.current?.getTracks());
+        console.log("Local stream tracks:", localStreamRef.current?.getTracks());
       }
 
       pc.onicecandidate = event => {
@@ -89,7 +88,7 @@ const VideoRoom = () => {
       };
 
       pc.ontrack = event => {
-        console.log("📥 Remote stream received from offer:", from, event.streams[0]);
+        console.log("Remote stream received from offer:", from, event.streams[0]);
         if (event.streams && event.streams[0]) {
           setRemoteStreams(prev => ({
             ...prev,
@@ -101,7 +100,6 @@ const VideoRoom = () => {
       try {
         await pc.setRemoteDescription(new RTCSessionDescription(offer));
 
-        // Process pending ICE candidates
         if (pendingIce.current[from]?.length) {
           console.log('Processing pending ICE candidates for:', from);
           for (const candidate of pendingIce.current[from]) {
@@ -119,7 +117,6 @@ const VideoRoom = () => {
         socketRef.current.emit("answer", { to: from, answer });
       } catch (err) {
         console.error("Error handling offer:", err);
-        // Clean up on error
         if (peerConnections[from]) {
           peerConnections[from].close();
           delete peerConnections[from];
@@ -134,9 +131,9 @@ const VideoRoom = () => {
       if (pc.signalingState === "have-local-offer") {
         try {
           await pc.setRemoteDescription(new RTCSessionDescription(answer));
-          console.log(`✅ Remote description set for ${from}`);
+          console.log(`Remote description set for ${from}`);
         } catch (err) {
-          console.error(`❌ Failed to set remote description for ${from}:`, err);
+          console.error(`Failed to set remote description for ${from}:`, err);
         }
       }
     };
@@ -173,7 +170,6 @@ const VideoRoom = () => {
       navigate("/unauthorized");
     };
 
-    // Socket listeners
     init();
     socket.on("user-connected", handleUserConnected);
     socket.on("offer", handleOffer);
@@ -210,7 +206,7 @@ const VideoRoom = () => {
     localStreamRef.current.getTracks().forEach(track => {
       pc.addTrack(track, localStreamRef.current);
     });
-    console.log("📹 Local stream tracks:", localStreamRef.current?.getTracks());
+    console.log("Local stream tracks:", localStreamRef.current?.getTracks());
 
     pc.onicecandidate = event => {
       if (event.candidate) {
@@ -219,7 +215,7 @@ const VideoRoom = () => {
     };
 
     pc.ontrack = event => {
-      console.log("📥 Remote stream received from answer:", remoteUserId, event.streams[0]);
+      console.log("Remote stream received from answer:", remoteUserId, event.streams[0]);
       if (event.streams && event.streams[0]) {
         setRemoteStreams(prev => ({
           ...prev,
@@ -238,21 +234,17 @@ const VideoRoom = () => {
   }, []);
 
   const handleBack = () => {
-    // Force stop camera immediately
     if (localStreamRef.current) {
       localStreamRef.current.getTracks().forEach(track => track.stop());
     }
 
-    // Close peer connections instantly
     for (const key in peerConnections) {
       peerConnections[key].close();
       delete peerConnections[key];
     }
 
-    // Disconnect socket without waiting
     socketRef.current?.disconnect();
 
-    // Hard navigate without adding to browser history
     window.location.replace("/chatbox");
   };
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import "../stylesheets/Profile.css";
 import SideBar from "./SideBar";
+import { FaStar } from "react-icons/fa";
 
 const Profile = () => {
     const { user } = useAuth();
@@ -27,7 +28,7 @@ const Profile = () => {
                         <h1>Profile</h1>
                         <p>Manage your professional information</p>
                     </div>
-                    <button className="edit-profile">✏️ Edit Profile</button>
+                    <button className="edit-profile">Edit Profile</button>
                 </header>
 
                 <div className="profile-layout">
@@ -41,9 +42,9 @@ const Profile = () => {
                                 {user?.role === "doctor" && <span>{user?.specialization}</span>}
                             </div>
                             <div className="contact-info">
-                                <p>📧 {user?.email}</p>
-                                <p>📞 +1 (555) 123-4567</p>
-                                <p>📍 New York, NY</p>
+                                <p>{user?.email}</p>
+                                <p>+1 (555) 123-4567</p>
+                                <p>New York, NY</p>
                             </div>
                         </div>
                     </section>
@@ -100,11 +101,11 @@ const Profile = () => {
                             <h3>Recent Activity</h3>
                             <p className="sub">Your latest professional activities</p>
                             <ul className="activity-list">
-                                <li><span>📅</span> Completed consultation with Sarah Johnson <time>2 hours ago</time></li>
-                                <li><span>📅</span> Completed consultation with Sarah Johnson <time>2 hours ago</time></li>
-                                <li><span>📅</span> Updated patient care protocol <time>1 day ago</time></li>
-                                <li><span>📅</span> Attended cardiology conference <time>3 days ago</time></li>
-                                <li><span>📅</span> Published research paper <time>1 week ago</time></li>
+                                <li><span><FaStar /></span> Completed consultation with Sarah Johnson <time>2 hours ago</time></li>
+                                <li><span><FaStar /></span> Completed consultation with Sarah Johnson <time>2 hours ago</time></li>
+                                <li><span><FaStar /></span> Updated patient care protocol <time>1 day ago</time></li>
+                                <li><span><FaStar /></span> Attended cardiology conference <time>3 days ago</time></li>
+                                <li><span><FaStar /></span> Published research paper <time>1 week ago</time></li>
                             </ul>
                         </div>
                     </section>

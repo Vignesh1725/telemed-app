@@ -6,6 +6,7 @@ import { io } from 'socket.io-client'
 import { useAuth } from "../context/AuthContext";
 import { useRecipientId } from "../context/RecipientContext";
 import SideBar from "./SideBar";
+import { FaPhone, FaSearch, FaVideo, FaEllipsisH, FaEllipsisV, FaPaperPlane, FaPaperclip } from "react-icons/fa";
 
 const ChatBox = () => {
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ const ChatBox = () => {
       const socket = socketRef.current;
 
       socket.on('connect', () => {
-        console.log("✅ Connected with socket ID:", socket.id);
+        console.log("Connected with socket ID:", socket.id);
         socket.emit('join-room', { userId })
       });
 
@@ -87,9 +88,9 @@ const ChatBox = () => {
           });
 
           setChat((prev) => [...prev, { senderName, message, time }]);
-          console.log("📥 Message added to current chat:", message);
+          console.log("Message added to current chat:", message);
         } else {
-          console.log("📨 Message ignored (not in active chat)");
+          console.log("Message ignored (not in active chat)");
         }
       };
 
@@ -181,7 +182,10 @@ const ChatBox = () => {
       <main className="chat-main-content">
         <section className="chat-sidebar">
           <h2>Messages</h2>
-          <input type="text" placeholder="🔍 Search conversations..." className="search-bar" />
+          <div className="search-bar">
+            <FaSearch style={{ color: "grey" }} />
+            <input type="text" placeholder="Search conversations..." />
+          </div>
 
           <ul>
             {friendList.map((list, i) =>
@@ -191,10 +195,11 @@ const ChatBox = () => {
                   <div className="avatar mc">{getInitials(list.firstName, list.lastName)}</div>
                   <div className="preview">
                     <strong>{list.firstName}</strong>
-                    <p>When should I schedule my next ap...</p>
+                    <p>Recent messages showed here....</p>
                   </div>
-                  {/* <span className="badge">2</span> */}
+                  <span className="badge">1</span>
                 </div>
+                <hr className="next-hr"></hr>
               </li>
             )
             )}
@@ -211,9 +216,9 @@ const ChatBox = () => {
               </div>
             </div>
             <div className="chat-actions">
-              <button>📞</button>
-              <button onClick={handleVideoCall}>🎥</button>
-              <button>⋮</button>
+              <button><FaPhone /></button>
+              <button onClick={handleVideoCall}><FaVideo /></button>
+              <button><FaEllipsisV /></button>
             </div>
           </header>
 
@@ -228,7 +233,7 @@ const ChatBox = () => {
           </div>
 
           <footer className="chat-input">
-            <button>📎</button>
+            <button><FaPaperclip /></button>
             <input
               ref={messageInputRef}
               type="text"
@@ -242,7 +247,7 @@ const ChatBox = () => {
                 }
               }}
             />
-            <button onClick={send} disabled={!message.trim()} className="send">📩</button>
+            <button onClick={send} disabled={!message.trim()} className="send"><FaPaperPlane /></button>
           </footer>
         </section>
       </main >

@@ -1,4 +1,3 @@
-// client/VideoStream.js
 import { useEffect, useRef } from "react";
 import '../stylesheets/VideoRoom.css'
 

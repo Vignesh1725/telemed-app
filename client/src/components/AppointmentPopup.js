@@ -29,7 +29,6 @@ const AppointmentPopup = ({ onClose }) => {
             alert("Appointment booked")
             setForm({ doctorId: "", startTime: "", endTime: "", comType: "Video Call", notes: "", action: "Join Call" });
             setRecipientId(null);
-            // Refresh appointments
             const res = await axios.get(API + "/appointments/my", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`

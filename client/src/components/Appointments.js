@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useRecipientId } from "../context/RecipientContext";
 import SideBar from "./SideBar";
+import { FaSearch } from "react-icons/fa";
 
 const Appointments = () => {
   const { recipientId, setRecipientId } = useRecipientId();
@@ -59,7 +60,10 @@ const Appointments = () => {
         <section className="filter-section">
           <h2>Filter Appointments</h2>
           <div className="filter-controls">
-            <input type="text" placeholder="Search appointments..." />
+            <div className="search-box">
+              <FaSearch style={{ color: "grey" }} />
+              <input type="text" placeholder="Search appointments..." />
+            </div>
             <select>
               <option>All</option>
               <option>Upcoming</option>
