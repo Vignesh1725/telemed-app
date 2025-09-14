@@ -4,6 +4,7 @@ const { verifyToken } = require("../middleware/auth");
 const Message = require("../models/Message");
 const mongoose = require("mongoose");
 
+//Send Message
 router.post("/send", verifyToken, async (req, res) => {
   try {
     const { sender, senderId, recipientId, message } = req.body;
@@ -32,6 +33,7 @@ router.post("/send", verifyToken, async (req, res) => {
   }
 });
 
+//Fetch Message
 router.get("/getmsg/:userId", verifyToken, async (req, res) => {
   try {
     const currentUserId = mongoose.Types.ObjectId.isValid(req.user.id)

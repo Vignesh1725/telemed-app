@@ -47,7 +47,6 @@ router.post('/login', async (req, res) => {
         const models = [Patient, Doctor, Admin];
         let user = null;
 
-        // Search each model for the email
         for (const Model of models) {
             const found = await Model.findOne({ email });
             if (found) {

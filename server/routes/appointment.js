@@ -35,7 +35,6 @@ router.post("/create", verifyToken, async (req, res) => {
   }
 });
 
-// Get appointments for the logged-in user
 router.get("/my", verifyToken, async (req, res) => {
   try {
     const userId = req.user.id;
