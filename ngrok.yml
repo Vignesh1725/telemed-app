@@ -1,0 +1,12 @@
+authtoken: 2xE0JAwMPCnAkWtBGtPegGWOLKW_4UKk6jJatJ6zfLFyoBXfF
+version: 2
+tunnels:
+  api:
+    addr: 5000
+    proto: http
+  video:
+    addr: 4000
+    proto: http
+  client:
+    addr: 3000
+    proto: http
