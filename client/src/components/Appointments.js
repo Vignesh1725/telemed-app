@@ -78,7 +78,6 @@ const Appointments = () => {
               <div className="avatar">{apt.doctor?.firstName[0].toUpperCase()}{apt.doctor?.lastName[0].toUpperCase()}</div>
               <div className="info">
                 <strong>{apt.doctor?.firstName} {apt.doctor?.lastName}</strong>
-                <p>{apt.comType}</p>
                 <p>{new Date(apt.startTime).toLocaleDateString('en-GB')} - {new Date(apt.startTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })} - {new Date(apt.endTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</p>
               </div>
               <div className="details">

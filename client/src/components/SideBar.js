@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const SideBar = ({ id }) => {
-    const { logout } = useAuth();
+    const { user, logout } = useAuth();
 
     const menuItems = [
         { key: 'dashboard', path: '/dashboard', label: 'Dashboard' },
         { key: 'appointments', path: '/appointments', label: 'Appointments' },
         { key: 'chat', path: '/chatbox', label: 'Chat' },
         { key: 'doctors', path: '/doctors', label: 'Doctors' },
-        { key: 'profile', path: '/profile', label: 'Profile' }
+        { key: 'profile', path: '/profile', label: 'Profile' },
     ];
 
     return (

@@ -11,7 +11,7 @@ dotenv.config()
 const app = express()
 const server = http.createServer(app)
 const corsOptions = {
-  origin: process.env.CLIENT,
+  origin: "http://localhost:3000",
   methods: ["GET", "POST"],
   credentials: true
 }
@@ -148,5 +148,5 @@ io.on('connection', socket => {
   })
 });
 
-server.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
+server.listen(PORT, '0.0.0.0', () => console.log(`Server is running on port ${PORT}`))
 

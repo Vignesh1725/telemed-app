@@ -84,7 +84,7 @@ router.post('/login', async (req, res) => {
                 lastName: user.lastName,
                 email: user.email,
                 role: user.role,
-                specialization: user.specialization,
+                specialization: user.specialization ? user.specialization : null,
                 licenseNumber: user.licenseNumber ? user.licenseNumber : null
             }
         });

@@ -7,7 +7,7 @@ import VideoRoom from './components/VideoRoom';
 import Appointments from './components/Appointments';
 import ChatBox from './components/ChatBox';
 import Dashboard from './components/Dashboard';
-import HealthStatus from './components/HealthStatus';
+import HealthRecord from './components/HealthRecord';
 import Profile from './components/Profile';
 import Doctors from './components/Doctors';
 
@@ -24,7 +24,6 @@ const App = () => {
         <Route path='/chatbox' element={<ChatBox />} />
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/doctors' element={<Doctors />}></Route>
-        <Route path='/healthstatus' element={<HealthStatus />} />
       </Routes>
     </div>
   );

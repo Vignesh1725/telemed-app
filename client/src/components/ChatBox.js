@@ -67,7 +67,7 @@ const ChatBox = () => {
   useEffect(() => {
     try {
       if (!userId) return;
-      socketRef.current = io("http://localhost:5000")
+      socketRef.current = io("ws://localhost:5000")
       const socket = socketRef.current;
 
       socket.on('connect', () => {

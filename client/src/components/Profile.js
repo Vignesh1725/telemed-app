@@ -2,8 +2,37 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import "../stylesheets/Profile.css";
+import '../stylesheets/HealthRecord.css';
 import SideBar from "./SideBar";
 import { FaStar } from "react-icons/fa";
+
+
+const data = [
+    {
+        health_issue: "Type 2 Diabetes",
+        related_problem: "Frequent urination, increased thirst, and fatigue",
+        from: "2021-03-15",
+        to: "Present"
+    },
+    {
+        health_issue: "High Blood Pressure",
+        related_problem: "Headaches, dizziness, and blurred vision",
+        from: "2020-08-10",
+        to: "Present"
+    },
+    {
+        health_issue: "Cholesterol Imbalance",
+        related_problem: "Mild chest discomfort and occasional shortness of breath",
+        from: "2019-11-05",
+        to: "2022-12-20"
+    },
+    {
+        health_issue: "Vitamin D Deficiency",
+        related_problem: "Joint pain and tiredness",
+        from: "2023-06-01",
+        to: "2023-12-10"
+    }
+];
 
 const Profile = () => {
     const { user } = useAuth();
@@ -13,9 +42,11 @@ const Profile = () => {
     const firstName = user?.firstName || null
     const lastName = user?.lastName || null
     const specialization = user?.specialization || null;
+    const licenseNumber = user?.licenseNumber || null;
 
     const getInitials = (firstName, lastName) => {
-        return `${firstName[0] || ''}${lastName[0] || ''}`.toUpperCase();
+        if (firstName && lastName)
+            return `${firstName[0] || ''}${lastName[0] || ''}`.toUpperCase();
     }
 
     return (
@@ -49,66 +80,96 @@ const Profile = () => {
                         </div>
                     </section>
 
-                    <section className="profile-right">
-                        <div className="stats-box">
-                            <h3>Statistics</h3>
-                            <div className="stats-grid">
-                                <div className="stat">
-                                    <h2>2,543</h2>
-                                    <p>Total Patients</p>
-                                </div>
-                                <div className="stat">
-                                    <h2>1,847</h2>
-                                    <p>Consultations</p>
-                                </div>
-                                <div className="stat">
-                                    <h2>98.5%</h2>
-                                    <p>Success Rate</p>
-                                </div>
-                                <div className="stat">
-                                    <h2>15</h2>
-                                    <p>Years Experience</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="info-box">
-                            <h3>Professional Information</h3>
-                            <p className="sub">Your medical credentials and experience</p>
-                            <div className="row">
-                                <div>
-                                    <label>License Number</label>
-                                    <div className="readonly-field">NY-12345678</div>
-                                </div>
-                                <div>
-                                    <label>Years of Experience</label>
-                                    <div className="readonly-field">15 years</div>
+                    {role === 'doctor' ? (
+                        <section className="profile-right">
+                            <div className="stats-box">
+                                <h3>Statistics</h3>
+                                <div className="stats-grid">
+                                    <div className="stat">
+                                        <h2>2,543</h2>
+                                        <p>Total Patients</p>
+                                    </div>
+                                    <div className="stat">
+                                        <h2>1,847</h2>
+                                        <p>Consultations</p>
+                                    </div>
+                                    <div className="stat">
+                                        <h2>98.5%</h2>
+                                        <p>Success Rate</p>
+                                    </div>
+                                    <div className="stat">
+                                        <h2>15</h2>
+                                        <p>Years Experience</p>
+                                    </div>
                                 </div>
                             </div>
-                            <label>Education</label>
-                            <div className="readonly-field">MD from Harvard Medical School</div>
-                        </div>
 
-                        <div className="info-box">
-                            <h3>Professional Bio</h3>
-                            <p className="sub">Tell patients about your background and expertise</p>
-                            <p className="bio-text">
-                                Experienced cardiologist with over 15 years in cardiovascular medicine. Specialized in preventive cardiology and heart disease management.
-                            </p>
-                        </div>
+                            <div className="info-box">
+                                <h3>Professional Information</h3>
+                                <p className="sub">Your medical credentials and experience</p>
+                                <div className="row">
+                                    <div>
+                                        <label>License Number</label>
+                                        <div className="readonly-field">{licenseNumber}</div>
+                                    </div>
+                                    <div>
+                                        <label>Years of Experience</label>
+                                        <div className="readonly-field">15 years</div>
+                                    </div>
+                                </div>
+                                <label>Education</label>
+                                <div className="readonly-field">MD from Harvard Medical School</div>
+                            </div>
 
-                        <div className="info-box">
-                            <h3>Recent Activity</h3>
-                            <p className="sub">Your latest professional activities</p>
-                            <ul className="activity-list">
-                                <li><span><FaStar /></span> Completed consultation with Sarah Johnson <time>2 hours ago</time></li>
-                                <li><span><FaStar /></span> Completed consultation with Sarah Johnson <time>2 hours ago</time></li>
-                                <li><span><FaStar /></span> Updated patient care protocol <time>1 day ago</time></li>
-                                <li><span><FaStar /></span> Attended cardiology conference <time>3 days ago</time></li>
-                                <li><span><FaStar /></span> Published research paper <time>1 week ago</time></li>
-                            </ul>
-                        </div>
-                    </section>
+                            <div className="info-box">
+                                <h3>Professional Bio</h3>
+                                <p className="sub">Tell patients about your background and expertise</p>
+                                <p className="bio-text">
+                                    Experienced cardiologist with over 15 years in cardiovascular medicine. Specialized in preventive cardiology and heart disease management.
+                                </p>
+                            </div>
+
+                            <div className="info-box">
+                                <h3>Recent Activity</h3>
+                                <p className="sub">Your latest professional activities</p>
+                                <ul className="activity-list">
+                                    <li><span><FaStar /></span> Completed consultation with Sarah Johnson <time>2 hours ago</time></li>
+                                    <li><span><FaStar /></span> Completed consultation with Sarah Johnson <time>2 hours ago</time></li>
+                                    <li><span><FaStar /></span> Updated patient care protocol <time>1 day ago</time></li>
+                                    <li><span><FaStar /></span> Attended cardiology conference <time>3 days ago</time></li>
+                                    <li><span><FaStar /></span> Published research paper <time>1 week ago</time></li>
+                                </ul>
+                            </div>
+                        </section>
+                    ) : (
+                        <section className="hr-container">
+
+                            <main className="main-container">
+                                <header className="header">
+                                    <div>
+                                        <h1>Health Record</h1>
+                                        <p>All systems operational. Last updated: {new Date().toLocaleTimeString()}</p>
+                                    </div>
+                                    <div className="new-record">New Record</div>
+                                </header>
+
+                                <section>
+                                    {data.map((item, key) => (
+                                        <div key={key} className="record-card">
+                                            <div>
+                                                <strong>{item.health_issue}</strong>
+                                                <p>{item.related_problem}</p>
+                                            </div>
+                                            <div className="date-card">
+                                                <p><strong>Duration:</strong> <span>{item.from}</span> - <span>{item.to}</span></p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </section>
+
+                            </main>
+                        </section >
+                    )}
                 </div>
             </main>
         </div>
